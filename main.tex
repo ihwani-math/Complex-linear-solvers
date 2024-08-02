@@ -38,18 +38,16 @@ ${\bf{v}}^L_{n+1} = {\Tilde{\bf{v}}}^L_{n+1} / \beta_n$ .}
 If break down does not occur at step 7, the above algorithm generates a conjugate orthogonal basis of the Krylov subspace such that $<{\bar{\bf{v}}}^L_{i}, \, {\bf{v}}^L_{j}> = \delta_{ij}$. If we set $V^L = ({\bf{v}}^L_1 , \, \dots ,\, {\bf{v}}^L_n)$, similar to the Lanczos biorthogonalization process, Alg. \ref{Alg1} can also be written in matrix form. The matix form of Alg. \ref{Alg1} is given by $A V^L_n = V^L_{n+1} \Tilde{T}^L_{n} = V^L_n T^L_n + \beta_n {\bf{v}}^L_{n+1}{\bf{e}}^T_n$, where ${\bf{e}}_n = (0, \, 0,\, \dots ,\, 1)^T \in \mathbb{R}^n$, $(V^L_n )^T V^L_n = I_n$, $\Tilde{T}^L_n$, and $T^L_n$ are the $(n+1) \times n$ and $n\times n$ tridiagonal matrices whose diagonal entries are $\alpha_1 , \alpha_2, \dots $ and subdiagonal entries are $\beta_1 ,\, \beta_2 , \, \dots$ representing the recurrence coefficients of the complex symmetric Lanczos process. From the above, we see that $T^L_n$ is also complex symmetric. In the interest of counteraction against such breakdowns, refert oneself to remedies such as so-called look-ahead techniques (Van der Vorst, 2003; Saad, 2003), which can enhance stability while increasing cost modestly or others.  
 
 \subsubsection{COCG Algorithm}
+The COCG method is proposed as a useful Krylov subspace method for solving complex symmetric linear systems, and it is derived from the complex Lanczos process (see Alg \ref{Alg1}) of Krylov subspace. Here we describe below the COCG algorithm when applied to the system $A \bf{x} = \bf{b}$ with a complex symmetric matrix $A$. Its pseudocodes are given as follows.
 \begin{algorithm}
-\caption{The complex symmetric Lanczos process}
+\caption{The COCG method}
 \begin{algorithmic}[1]
-\label{Alg1}
-\State Set $\beta_0=0$, ${\bf{v}}^L_{0} = \bf{0}$, $\bf{r}_0 \neq \bf{0} \in \mathbb{C}^{N}$. 
-\State Set ${\bf{v}}^{L}_{1} = \bf{r}_0 / \left\| \bf{r}_0 \right\|$.
-\For{$n=1, \, 2, \, \dots , \, m-1$}
+\label{Alg2}
+\Require Give an initial guess ${\bf{x}}^G_0$ and compute ${\bf{r}}^G_0 = \bf{b}-A {\bf{x}}^{G}_0$. 
+\State Set ${\bf{p}}^G_0 = {\bf{r}}^G_0, \, \rho_0 = <\bar{{\bf{r}}}^G_0 ,\, {\bf{r}}^G_0 >$ .
+\For{$n=1, \, 2, \, \dots $ until convergence}
 \do{ :\\
-${\bf{s}}^L_n = A {\bf{v}}^L_n$, \quad $\alpha_n = < {\bar{\bf{v}}}^L_n , {\bf{s}}^L_{n}>$. $^1$\\
-${\Tilde{\bf{v}}}^L_{n+1} = {\bf{s}}^L_n - \alpha_n {\bf{v}}^L_n - \beta_{n-1} \bf{v}_{n-1}$. \\
-$\beta_n = <{\bar{\Tilde{\bf{v}}}}^L_{n+1} , \, {\Tilde{\bf{v}}}^L_{n+1}>^{1/2}$.\\
-${\bf{v}}^L_{n+1} = {\Tilde{\bf{v}}}^L_{n+1} / \beta_n$ .}
+ ${\bf{q}}^G_{n-1}$.}
 \EndFor
 \end{algorithmic}
 \end{algorithm}
