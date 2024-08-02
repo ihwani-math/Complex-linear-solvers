@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+
+\title{Sample Document with Algorithm}
+\author{Your Name}
+\date{\today}
+\maketitle
+
+\section{Introduction}
+This document demonstrates linear solvers for complex linear system.
+
+\section{Algorithms}
+Below is an examples of an algorithm written in pseudocode.
+
+\subsection{COCG and QMR\_SYM methods}
+
+As we know, both COCG and QMR\_SYM are based on the well-lnown complex symmetisc Lanczos process, which is a special case for the Lanczos biorthogonalization process when the coefficient matrix is complex symmetric. This algorithm can be given as the following pseudocode.
+\begin{algorithm}
+\caption{The complex symmetric Lanczos process}
+\begin{algorithmic}[1]
+\State Set $\beta_0=0$, $\bf{v}^L_{0} = \bf{0}$, $\bf{r}_0 \neq \bf{0} \in \mathbb{C}^{N}$. 
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}
+\begin{algorithm}
+\caption{The complex symmetric Lanczos process}
+\begin{algorithmic}[3]
+\Require $n \geq 0$ \Comment{Input condition}
+\Ensure $y = x^n$ \Comment{Output condition}
+\Function{Power}{$x,n$}
+    \State $y \gets 1$
+    \State $z \gets x$
+    \State $m \gets n$
+    \While{$m > 0$}
+        \If{$m$ is even}
+            \State $z \gets z \times z$
+            \State $m \gets m / 2$
+        \Else
+            \State $y \gets y \times z$
+            \State $m \gets m - 1$
+        \EndIf
+    \EndWhile
+    \State \Return $y$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}
