@@ -47,7 +47,11 @@ The COCG method is proposed as a useful Krylov subspace method for solving compl
 \State Set ${\bf{p}}^G_0 = {\bf{r}}^G_0, \, \rho_0 = <\bar{{\bf{r}}}^G_0 ,\, {\bf{r}}^G_0 >$ .
 \For{$n=1, \, 2, \, \dots $ until convergence}
 \do{ :\\
- ${\bf{q}}^G_{n-1}$.}
+ ${\bf{q}}^G_{n-1} = A {\bf{p}}^G_{n-1}, \, \alpha_{n-1} = \rho_{n-1} / <\bar{{\bf{p}}}^G_{n-1} , \, {\bf{q}}^G_{n-1}>$.\\
+ ${\bf{x}}^G_n = {\bf{x}}^G_{n-1} + \alpha_{n-1} {\bf{p}}^G_{n-1}$.\\
+ ${\bf{r}}^G_n = {\bf{r}}^G_{n-1} - \alpha_{n-1} {\bf{q}}^G_{n-1}$.\\
+ $\rho_n = < \bar{{\bf{r}}}^G_n ,\, {\bf{r}}^G_n > , \, \beta_{n-1} = \rho_n / \rho_{n-1}$.\\
+ ${\bf{p}}^G_n = {\bf{r}}^G_n + \beta_{n-1} {\bf{p}}^G_{n-1}$.}
 \EndFor
 \end{algorithmic}
 \end{algorithm}
